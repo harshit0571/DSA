@@ -9,9 +9,9 @@ int main()
     // int y = 20 & 1;
     // cout << y;
 
-    // or operators (||)
-    // int x = 1 || 1;
-    // int y = 20 || 0;
+    // or operators (|)
+    // int x = 1 | 1;
+    // int y = 20 | 0;
     // cout << x;
 
     // ex-or (^)

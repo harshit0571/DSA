@@ -16,3 +16,5 @@ int main()
         cout << "not";
     }
 }
+
+// find exponentials of two
