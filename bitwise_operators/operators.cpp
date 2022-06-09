@@ -15,7 +15,7 @@ int main()
     // cout << x;
 
     // ex-or (^)
-    // int x = 1 ^ 0;
+    // int x = 411 ^ 414;
     // cout << x;
 
     // left shift operator(<<)
