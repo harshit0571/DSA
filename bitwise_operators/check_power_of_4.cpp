@@ -33,3 +33,9 @@ int main()
         cout << "not " << count;
     }
 }
+
+// //Time Complexity: O(log4n)
+
+// Auxiliary Space: O(1)
+
+// //
