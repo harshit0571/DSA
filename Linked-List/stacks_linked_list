@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+class Node 
+{
+public:
+   int data;
+   Node *next;
+};
+
+class Stack
+{
+private: 
+
+Node *top; 
+public:
+Stack()
+{
+    top=NULL;
+}
+  void push(int val) {
+      
+    Node* newnode = new Node;
+    newnode->data = val;
+    newnode->next = top;
+    top = newnode;
+}
+void insertAtLast(int val){
+    Node *temp=top;
+    Node *newnode =new Node;
+    cout<<temp->data;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    newnode->data=val;
+    newnode->next=NULL;
+    temp->next=newnode;
+}
+void pop() {
+   if(top==NULL)
+      cout<<"Stack Underflow"<<endl;
+   else {
+      cout<<"The popped element is "<< top->data <<endl;
+      top = top->next;
+   }
+}
+void display() 
+{
+   Node* ptr;
+   if(top==NULL)
+   cout<<"stack is empty";
+   else
+   {
+      ptr = top;
+      cout<<"Stack elements are: ";
+      while (ptr != NULL)
+      {
+         cout<< ptr->data <<" ";
+         ptr = ptr->next;
+      }
+   }
+   cout<<endl;
+}
+};
+
+//class Node* top = NULL;
+
+int main() {
+   Stack stk;
+	
+	stk.push(11);
+	stk.push(12);
+	stk.push(13);
+	stk.push(14);
+	stk.push(15);
+	stk.insertAtLast(27);
+	
+	stk.display();
+	
+// 	stk.pop();
+	
+// 	stk.display();
+	
+	return 0;
+}
