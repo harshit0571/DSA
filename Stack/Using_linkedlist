@@ -1,0 +1,49 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+
+
+class Node{
+    public:
+    int data;
+    Node* next;
+    Node(int a){
+        data=a;
+    }
+};
+
+class Stack{
+  public:
+    Node* top;
+    int data;
+    Stack* next;
+    void push(int a){
+        Node* newnode=new Node(a);
+        if(top==NULL){
+            top=newnode;
+            newnode->next=NULL;
+        }
+        else{
+            newnode->next=top;
+            top=newnode;
+        }
+    }
+    void print(){
+        Node* ptr;
+        ptr=top;
+        while(ptr!=NULL){
+            cout<<ptr->data<<" ";
+            ptr=ptr->next;
+        }
+    }
+};
+
+int main() {
+    Stack S;
+    S.push(10);
+    S.push(10);
+    S.push(30);
+    cout<<"working";
+    S.print();
+    return 0;
+}
