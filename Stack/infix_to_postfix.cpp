@@ -1,97 +1,68 @@
+// Online C++ compiler to run C++ program online
 #include <iostream>
-#include <bits/stdc++.h>
-#include <vector> 
-#include <stack>
-#include <string>
-#include <queue>
 using namespace std;
-class Node{
-    public:
-    int data;
-    Node* left;
-    Node* right;
+#include <bits/stdc++.h>
 
-    Node(int d){
-        this->data = d;
-        this->left = NULL;
-        this->right = NULL;
+
+
+int CheckPrec(char c){
+    if(c=='^'){
+        return 3;
     }
-};
-Node* insertintoBST(Node* &root,int d){
-    if(root == NULL){
-        root = new Node(d);
-        return root;
+    else if(c=='*' || c=='/'){
+        return 2;
     }
-    if(d>root->data){
-        root->right = insertintoBST(root->right,d);
+    else if(c=='+' || c=='-'){
+        return 1;
+    }
+    else if(c>='a' && c<='z' || c>='A' && c<='Z'){
+        return 0;
     }
     else{
-        root->left = insertintoBST(root->left,d);
-    }
-    return root;
-}
-void takinginput(Node* &root,int n){
-    int data;
-    while(n>0){
-        cin>>data;
-        insertintoBST(root,data);
-        n--;
+        return -1;
     }
 }
-void preorder(Node* root){
-    if(root ==NULL){
-        return;
-    }
-    cout<<root->data<<" ";
-    preorder(root->left);
-    preorder(root->right);
-}
-void inorder(Node* root){
-    if(root ==NULL){
-        return;
-    }
-    inorder(root->left);
-    cout<<root->data<<" ";
-    inorder(root->right);
-}
-void postorder(Node* root){
-    if(root ==NULL){
-        return;
-    }
-    postorder(root->left);
-    postorder(root->right);
-    cout<<root->data<<" ";
-}
-void levelorder(Node* root){
-    queue<Node*>q;
-    q.push(root);
-    while(!q.empty()){
-        Node* temp = q.front();
-        cout<<temp -> data<<" ";
-        q.pop();
-        if(temp->left){
-            q.push(temp->left);
+
+string InfixTOpostfix(string S){
+    stack<char> stk;
+    int prec;
+    string final="";
+    for(int i=0;i<S.length();i++){
+        prec=CheckPrec(S[i]);
+        if(prec==0){
+           final+=S[i];
         }
-        if(temp->right){
-            q.push(temp->right);
+        else if(S[i]=='('){
+            stk.push('(');
+        }        
+        else if(S[i]==')'){
+            while(!stk.empty() && stk.top()!='('){
+                final+=stk.top();
+                stk.pop();
+            }
+            if(!stk.empty()){
+                stk.pop();
+            }
+        }        
+        else{
+            while(!stk.empty() && CheckPrec(stk.top())>=CheckPrec(S[i])){
+                final+=stk.top();
+                stk.pop();
+            }
+            stk.push(S[i]);
         }
     }
+    while(!stk.empty()){
+        final+=stk.top();
+        stk.pop();
+    }
+    return final;
 }
-int main(){
-    int n;
-    cin >>n;
-    Node* root =NULL;
-    takinginput(root,n);
-    cout<<"preorder : ";
-    preorder(root);
-    cout<<endl;
-    cout<<"inorder : ";
-    inorder(root);
-    cout<<endl;
-    cout<<"postorder : ";
-    postorder(root);
-    cout<<endl;
-    cout<<"levelorder : ";
-    levelorder(root);
-    cout<<endl;
+
+int main() {
+    string s="(a+b-c)";
+    string a=InfixTOpostfix(s);
+    cout<<"a is "<<a;
+
+    return 0;
 }
