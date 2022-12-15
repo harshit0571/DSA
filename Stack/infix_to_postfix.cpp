@@ -1,68 +1,79 @@
 // Online C++ compiler to run C++ program online
 #include <iostream>
-using namespace std;
 #include <bits/stdc++.h>
+using namespace std;
 
 
-
-int CheckPrec(char c){
-    if(c=='^'){
-        return 3;
+class Node{
+    public:
+    int data;
+    Node* left;
+    Node* right;
+    Node(int d){
+        data=d;
+        this->left=NULL;
+        this->right=NULL;
     }
-    else if(c=='*' || c=='/'){
-        return 2;
-    }
-    else if(c=='+' || c=='-'){
-        return 1;
-    }
-    else if(c>='a' && c<='z' || c>='A' && c<='Z'){
-        return 0;
-    }
-    else{
-        return -1;
-    }
-}
-
-string InfixTOpostfix(string S){
-    stack<char> stk;
-    int prec;
-    string final="";
-    for(int i=0;i<S.length();i++){
-        prec=CheckPrec(S[i]);
-        if(prec==0){
-           final+=S[i];
+};
+void LevelOrder(Node* root){
+    queue<Node*> Q;
+    Node* temp=root;
+    Q.push(temp);
+    while(!Q.empty()){
+        temp=Q.front();
+        Q.pop();
+        cout<<temp->data<<" ";
+        if(temp->left){
+            Q.push(temp->left);
         }
-        else if(S[i]=='('){
-            stk.push('(');
-        }        
-        else if(S[i]==')'){
-            while(!stk.empty() && stk.top()!='('){
-                final+=stk.top();
-                stk.pop();
-            }
-            if(!stk.empty()){
-                stk.pop();
-            }
-        }        
-        else{
-            while(!stk.empty() && CheckPrec(stk.top())>=CheckPrec(S[i])){
-                final+=stk.top();
-                stk.pop();
-            }
-            stk.push(S[i]);
+        if(temp->right){
+            Q.push(temp->right);
         }
     }
-    while(!stk.empty()){
-        final+=stk.top();
-        stk.pop();
-    }
-    return final;
 }
+void preorder(Node* root){
+    if(root==NULL){
+        return;
+    }
+    cout<<root->data;
+    preorder(root->left);
+    preorder(root->right);
+}
+void inorder(Node* root){
+    if(root==NULL){
+        return;
+    }
+    inorder(root->left);
+    cout<<root->data;
+    inorder(root->right);    
+}
+void postorder(Node* root){
+    if(root==NULL){
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right); 
+        cout<<root->data;
 
-int main() {
-    string s="(a+b-c)";
-    string a=InfixTOpostfix(s);
-    cout<<"a is "<<a;
-  
-    return 0;
+}
+Node* InsertIntoBST(Node* root, int data){
+    if(root==NULL){
+        root=new Node(data);
+        return root;
+    }
+    if(data>root->data){
+        root->right=InsertIntoBST(root->right, data);
+    }
+    else if(data<root->data){
+        root->left=InsertIntoBST(root->left, data);
+    }
+    return root;    
+}
+void TakeInput(Node* &root,int n){
+    int data;
+    while(n>0){
+        cin>>data;
+        root=InsertIntoBST(root, data);
+        n--;
+    }
 }
