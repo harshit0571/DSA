@@ -64,10 +64,10 @@ void levelOrder(Node* root){
 
 
 
-int main() {
+//int main() {
     Node* root=NULL;
     root=buildTree(root);
     cout<<"done";
     levelOrder(root);
     return 0;
-}
+}//
