@@ -1,8 +1,17 @@
 class Solution {
+    boolean isPalindrome(StringBuilder s){
+        boolean flag=true;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)!=s.charAt(s.length()-i-1)){
+                flag=false;
+            }
+        }
+        return flag;
+    }
+
     public boolean validPalindrome(String s) {
         StringBuilder sb=new StringBuilder(s);
-        String SB=sb.toString();
-        if(SB.equals(sb.reverse().toString())){
+        if(isPalindrome(sb)){
             return true;
         }
         else{
@@ -13,13 +22,10 @@ class Solution {
                     StringBuilder s1=new StringBuilder(s);
                     StringBuilder s2=new StringBuilder(s);
                     s1.deleteCharAt(left);
-                    s2.deleteCharAt(right); 
-                    String S1=s1.toString();
-                    String S2=s2.toString();  
-
-                    if(S1.equals(s1.reverse().toString())){
+                    s2.deleteCharAt(right);                    
+                    if(isPalindrome(s1)){
                         return true;
-                    }else if(S2.equals(s2.reverse().toString())){
+                    }else if(isPalindrome(s2)){
                         return true;
                     }
                     else{
