@@ -23,3 +23,20 @@ public:
         return max_;
     }
 };
+
+
+
+//java sol
+class Solution {
+    public int maxArea(int[] h) {
+        int left=0;
+        int right=h.length-1;
+        int max=0;
+        while(left<right){
+            int vol=Math.min(h[left], h[right]) * (right-left);
+            max=Math.max(max, vol);
+            int a=h[left]>h[right] ? right--: left++;
+        }
+        return max;
+    }
+}
