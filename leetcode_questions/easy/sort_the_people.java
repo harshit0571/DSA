@@ -16,3 +16,22 @@ class Solution {
         return n;
     }
 }
+
+
+
+class Solution {
+    public String[] sortPeople(String[] n, int[] h) {
+        HashMap<Integer, String> map=new HashMap<>();
+        for(int i=0;i<n.length;i++){
+            map.put(h[i], n[i]);
+        }
+        Arrays.sort(h);
+        String[] ans=new String[h.length];
+        int k=0;
+        for(int i=h.length-1;i>=0;i--){
+            ans[k]=map.get(h[i]);
+            k++;
+        }
+        return ans;
+    }
+}
