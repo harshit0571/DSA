@@ -42,3 +42,26 @@ class Solution {
         return count+1;
     }
 }
+
+
+//O(n) time complexity
+class Solution {
+    public int partitionString(String s) {
+        int count=0;
+        HashSet<Character> map=new HashSet<>();
+        for(int i=0;i<s.length();i++){
+            System.out.println(s.charAt(i) + " "+i);
+                if(map.contains(s.charAt(i))){
+                    // System.out.println(s.charAt(i) + " "+i);
+                    count++;
+                    i=i-1;
+                    map.clear();
+                    continue;
+                }
+                else{
+                    map.add(s.charAt(i));
+                }
+        }
+        return count+1;
+    }
+}
