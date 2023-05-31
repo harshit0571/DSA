@@ -1,3 +1,4 @@
+```
 import java.util.Scanner;
 
 class ListNode {
@@ -42,3 +43,4 @@ public class template {
         print(head);
     }
 }
+```
