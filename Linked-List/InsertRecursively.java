@@ -29,6 +29,16 @@ public class InsertRecursively {
         temp.next = a;
     }
 
+    static ListNode insetRec(ListNode head, int val, int k) {
+        if (k == 0) {
+            ListNode temp = new ListNode(val);
+            temp.next = head;
+            return temp;
+        }
+        head.next = insetRec(head.next, val, k - 1);
+        return head;
+    }
+
     static ListNode input() {
         Scanner inp = new Scanner(System.in);
         ListNode head = new ListNode(-1);
@@ -53,7 +63,8 @@ public class InsertRecursively {
 
     public static void main(String[] args) {
         ListNode head = input();
-        insert(head, 10, 3);
+        // insert(head, 10, 3);
+        head = insetRec(head, 10, 0);
         print(head);
     }
 }
